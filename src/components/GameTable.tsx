@@ -41,11 +41,21 @@ export const GameTable = ({
           {data.map((row) => (
             <TableRow
               key={row.word}
-              className={clsx(row.outcome ? "" : classes.incorrect)}
+              className={clsx(
+                row.outcome === "CORRECT"
+                  ? classes.correctRow
+                  : row.outcome === "INCORRECT"
+                  ? classes.incorrectRow
+                  : classes.skippedRow
+              )}
             >
               <TableCell align="left">{caps(row.word)}</TableCell>
               <TableCell align="center">
-                {row.outcome ? "🤣 🤣 🤣 🤣" : "😔 😔 😔 😔"}
+                {row.outcome === "CORRECT"
+                  ? "🤣 🤣 🤣 🤣"
+                  : row.outcome === "INCORRECT"
+                  ? "😔 😔 😔 😔"
+                  : "🤨 🤨 🤨 🤨"}
               </TableCell>
               <TableCell align="right">{`${row.points}`}</TableCell>
             </TableRow>

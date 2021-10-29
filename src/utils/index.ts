@@ -34,7 +34,7 @@ export const getWordValue = (word: string) => {
       }
     });
   });
-  return val;
+  return val + word.length;
 };
 
 export const caps = (word: string) => {

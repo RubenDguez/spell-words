@@ -1,14 +1,7 @@
 import { makeStyles, Theme } from "@material-ui/core";
+import { blue, red, yellow } from "@material-ui/core/colors";
 
 export const useStyles = makeStyles((theme: Theme) => ({
-  correct: {
-    backgroundColor: theme.palette.primary.main,
-    color: "white",
-  },
-  incorrect: {
-    backgroundColor: theme.palette.secondary.light,
-    color: "white",
-  },
   word: {
     border: `2px solid ${theme.palette.primary.main}`,
     textAlign: "center",
@@ -21,5 +14,18 @@ export const useStyles = makeStyles((theme: Theme) => ({
     textAlign: "center",
     marginTop: "1rem",
     marginBottom: "1rem",
+  },
+  skipButton: {
+    backgroundColor: yellow[200],
+    color: red[400],
+  },
+  correctRow: {
+    backgroundColor: blue[100],
+  },
+  incorrectRow: {
+    backgroundColor: red[100],
+  },
+  skippedRow: {
+    backgroundColor: yellow[100],
   },
 }));

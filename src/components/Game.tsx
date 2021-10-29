@@ -5,15 +5,20 @@ import { useGame } from "../hooks";
 export const Game = () => {
   const {
     word,
+    wordsToPlay,
     totalPoints,
     totalCorrect,
     totalIncorrect,
+    totalWords,
     possiblePoints,
+    skipped,
     isStarted,
     tableData,
     startGame,
+    restartGame,
     correct,
     incorrect,
+    skip,
   } = useGame();
   return (
     <>
@@ -21,6 +26,8 @@ export const Game = () => {
         <GameHeader
           word={word}
           isStarted={isStarted}
+          totalWords={totalWords}
+          wordsToPlay={wordsToPlay}
           totalPoints={totalPoints}
           possiblePoints={possiblePoints}
         />
@@ -30,9 +37,14 @@ export const Game = () => {
           <Grid item xs={12}>
             <GameButtons
               isStarted={isStarted}
+              skippedWords={skipped}
+              totalWords={totalWords}
+              wordsToPlay={wordsToPlay}
               startGame={startGame}
+              restartGame={restartGame}
               correct={correct}
               incorrect={incorrect}
+              skip={skip}
             />
           </Grid>
           <Grid item xs={12}>

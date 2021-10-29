@@ -7,20 +7,33 @@ export const useGame = () => {
   const [
     {
       word,
+      wordsToPlay,
       totalPoints,
       totalCorrect,
       totalIncorrect,
+      totalWords,
       possiblePoints,
+      skipped,
       isStarted,
       tableData,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
 
-  const startGame = useCallback(() => {
-    getWord().then((resp) => {
-      dispatch({ type: "START GAME", payload: { word: resp } });
-    });
+  const startGame = useCallback(
+    (words: number) => {
+      getWord().then((resp) => {
+        dispatch({
+          type: "START GAME",
+          payload: { word: resp, wordsToPlay: words },
+        });
+      });
+    },
+    [dispatch]
+  );
+
+  const restartGame = useCallback(() => {
+    dispatch({ type: "RESTART GAME", payload: { state: initialState } });
   }, [dispatch]);
 
   const correct = useCallback(() => {
@@ -41,16 +54,30 @@ export const useGame = () => {
     });
   }, [dispatch]);
 
+  const skip = useCallback(() => {
+    getWord().then((resp) => {
+      dispatch({
+        type: "SKIP",
+        payload: { word: resp },
+      });
+    });
+  }, [dispatch]);
+
   return {
     word,
+    wordsToPlay,
     totalPoints,
     totalCorrect,
     totalIncorrect,
+    totalWords,
     possiblePoints,
+    skipped,
     isStarted,
     tableData,
     startGame,
+    restartGame,
     correct,
     incorrect,
+    skip,
   };
 };
