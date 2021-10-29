@@ -1,5 +1,4 @@
 import {
-  makeStyles,
   Paper,
   Table,
   TableBody,
@@ -7,11 +6,11 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Theme,
 } from "@material-ui/core";
 import clsx from "clsx";
-import { useGame } from "../hooks";
 import { TRow } from "../Types";
+import { caps } from "../utils";
+import { useStyles } from "./styles";
 
 interface IGameTable {
   data: TRow[];
@@ -26,7 +25,6 @@ export const GameTable = ({
   totalCorrect,
   totalIncorrect,
 }: IGameTable) => {
-  const { caps } = useGame();
   const classes = useStyles();
 
   return (
@@ -62,14 +60,3 @@ export const GameTable = ({
     </TableContainer>
   );
 };
-
-const useStyles = makeStyles((theme: Theme) => ({
-  correct: {
-    backgroundColor: theme.palette.primary.main,
-    color: "white",
-  },
-  incorrect: {
-    backgroundColor: theme.palette.secondary.light,
-    color: "white",
-  },
-}));

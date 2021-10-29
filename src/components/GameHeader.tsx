@@ -1,5 +1,6 @@
 import { Grid, makeStyles, Theme, Typography } from "@material-ui/core";
 import clsx from "clsx";
+import { useStyles } from "./styles";
 
 interface IGameHeader {
   word: string;
@@ -36,19 +37,3 @@ export const GameHeader = ({
     </Grid>
   );
 };
-
-const useStyles = makeStyles((theme: Theme) => ({
-  word: {
-    border: `2px solid ${theme.palette.primary.main}`,
-    textAlign: "center",
-    marginTop: "3rem",
-    marginBottom: "3rem",
-    borderRadius: "6px",
-    padding: "1rem",
-  },
-  totalPoints: {
-    textAlign: "center",
-    marginTop: "1rem",
-    marginBottom: "1rem",
-  },
-}));

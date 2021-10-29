@@ -1,17 +1,11 @@
+import { initialState } from "../store";
+
+export type State = typeof initialState;
+
 export type TRow = {
   word: string;
   outcome: boolean;
   points: number;
-};
-
-export type State = {
-  isStarted: boolean;
-  possiblePoints: number;
-  tableData: TRow[];
-  totalCorrect: number;
-  totalIncorrect: number;
-  totalPoints: number;
-  word: string;
 };
 
 export type Action =
