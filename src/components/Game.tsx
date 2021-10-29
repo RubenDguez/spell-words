@@ -32,7 +32,7 @@ export const Game = () => {
           possiblePoints={possiblePoints}
         />
       </Container>
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" style={{ marginTop: "3rem" }}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <GameButtons
