@@ -47,14 +47,16 @@ export const Game = () => {
               skip={skip}
             />
           </Grid>
-          <Grid item xs={12}>
-            <GameTable
-              data={tableData}
-              totalPoints={totalPoints}
-              totalCorrect={totalCorrect}
-              totalIncorrect={totalIncorrect}
-            />
-          </Grid>
+          {isStarted && (
+            <Grid item xs={12}>
+              <GameTable
+                data={tableData}
+                totalPoints={totalPoints}
+                totalCorrect={totalCorrect}
+                totalIncorrect={totalIncorrect}
+              />
+            </Grid>
+          )}
         </Grid>
       </Container>
     </>
