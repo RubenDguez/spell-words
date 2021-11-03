@@ -3,7 +3,7 @@ import { initialState } from "../store";
 export type State = typeof initialState;
 
 export type TRow = {
-  word: string;
+  word: TWord;
   outcome: "CORRECT" | "INCORRECT" | "SKIPPED";
   points: number;
 };
@@ -11,12 +11,18 @@ export type TRow = {
 export type Action =
   | {
       type: "START GAME";
-      payload: { word: string; wordsToPlay: number; meanings: TResponse };
+      payload: {
+        word: TWord;
+        wordsToPlay: number;
+        meanings: TResponse;
+        level: number;
+      };
     }
+  | { type: "SET WORDS"; payload: { words: TWord[] } }
   | { type: "RESTART GAME"; payload: { state: State } }
-  | { type: "CORRECT"; payload: { word: string; meanings: TResponse } }
-  | { type: "INCORRECT"; payload: { word: string; meanings: TResponse } }
-  | { type: "SKIP"; payload: { word: string; meanings: TResponse } };
+  | { type: "CORRECT"; payload: { word: TWord; meanings: TResponse } }
+  | { type: "INCORRECT"; payload: { word: TWord; meanings: TResponse } }
+  | { type: "SKIP"; payload: { word: TWord; meanings: TResponse } };
 
 export type TLetterValues = {
   letters: string;
@@ -28,6 +34,11 @@ export type TResponse = {
 };
 
 export type TWordResponse = {
-  word: string;
+  word: TWord;
   meanings: TResponse;
+};
+
+export type TWord = {
+  id: string;
+  word: string;
 };

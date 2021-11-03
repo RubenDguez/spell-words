@@ -26,8 +26,8 @@ export const GameHeader = ({
 
   return (
     <>
-      <Grid container spacing={1}>
-        <Grid item xs={12}>
+      <Grid item xs={12}>
+        <Paper>
           <Typography
             variant="h3"
             color="primary"
@@ -35,63 +35,63 @@ export const GameHeader = ({
           >
             {totalWords < wordsToPlay ? word.toUpperCase() : "Game Over"}
           </Typography>
-        </Grid>
-        {isStarted && (
-          <Container maxWidth="sm">
-            <Paper className={classes.container}>
-              <div className={classes.subContainer}>
-                <Typography
-                  variant="subtitle2"
-                  className={classes.subContainerTitle}
-                >
-                  Meaning(s):
-                </Typography>
-                {meanings.map((m) => (
-                  <Typography key={m} variant="caption" display="block">
-                    {caps(m)}
-                  </Typography>
-                ))}
-              </div>
-              <div className={classes.subContainer}>
-                <Typography variant="subtitle2" style={{ marginBottom: 4 }}>
-                  Points:
-                </Typography>
-                <Typography
-                  variant="caption"
-                  display="block"
-                  className={clsx(classes.totalPoints)}
-                >
-                  {`Total words played: ${totalWords}`}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  display="block"
-                  className={clsx(classes.totalPoints)}
-                >
-                  {`Words to be played: ${wordsToPlay}`}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  display="block"
-                  className={clsx(classes.totalPoints)}
-                >
-                  {`Remaining words: ${wordsToPlay - totalWords}`}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  display="block"
-                  className={clsx(classes.totalPoints)}
-                  style={{ marginTop: "1rem" }}
-                >
-                  {totalWords < wordsToPlay
-                    ? `This word plays for ${possiblePoints} points`
-                    : `Your total points: ${totalPoints}`}
-                </Typography>
-              </div>
-            </Paper>
-          </Container>
-        )}
+        </Paper>
       </Grid>
+      {isStarted && (
+        <Paper className={classes.container}>
+          {totalWords < wordsToPlay && (
+            <div className={classes.subContainer}>
+              <Typography
+                variant="subtitle2"
+                className={classes.subContainerTitle}
+              >
+                Meaning(s):
+              </Typography>
+              {meanings.map((m) => (
+                <Typography key={m} variant="caption" display="block">
+                  {caps(m)}
+                </Typography>
+              ))}
+            </div>
+          )}
+          <div className={classes.subContainer}>
+            <Typography variant="subtitle2" style={{ marginBottom: 4 }}>
+              Points:
+            </Typography>
+            <Typography
+              variant="caption"
+              display="block"
+              className={clsx(classes.totalPoints)}
+            >
+              {`Total words played: ${totalWords}`}
+            </Typography>
+            <Typography
+              variant="caption"
+              display="block"
+              className={clsx(classes.totalPoints)}
+            >
+              {`Words to be played: ${wordsToPlay}`}
+            </Typography>
+            <Typography
+              variant="caption"
+              display="block"
+              className={clsx(classes.totalPoints)}
+            >
+              {`Remaining words: ${wordsToPlay - totalWords}`}
+            </Typography>
+            <Typography
+              variant="caption"
+              display="block"
+              className={clsx(classes.totalPoints)}
+              style={{ marginTop: "1rem" }}
+            >
+              {totalWords < wordsToPlay
+                ? `This word plays for ${possiblePoints} points`
+                : `Your total points: ${totalPoints}`}
+            </Typography>
+          </div>
+        </Paper>
+      )}
     </>
   );
 };

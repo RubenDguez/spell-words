@@ -28,19 +28,24 @@ export const GameTable = ({
   const classes = useStyles();
 
   return (
-    <TableContainer component={Paper}>
-      <Table size="small">
+    <TableContainer component={Paper} style={{ maxHeight: 500 }}>
+      <Table stickyHeader>
         <TableHead style={{ backgroundColor: "lightgray" }}>
           <TableRow>
             <TableCell align="left">Word</TableCell>
             <TableCell align="center">Outcome</TableCell>
             <TableCell align="right">Points</TableCell>
           </TableRow>
+          <TableRow style={{ backgroundColor: "lightgray" }}>
+            <TableCell align="left">{`Total correct: ${totalCorrect}`}</TableCell>
+            <TableCell align="center">{`Total incorrect: ${totalIncorrect}`}</TableCell>
+            <TableCell align="right">{`Total points: ${totalPoints}`}</TableCell>
+          </TableRow>
         </TableHead>
         <TableBody>
           {data.map((row) => (
             <TableRow
-              key={row.word}
+              key={row.word.id}
               className={clsx(
                 row.outcome === "CORRECT"
                   ? classes.correctRow
@@ -49,8 +54,8 @@ export const GameTable = ({
                   : classes.skippedRow
               )}
             >
-              <TableCell align="left">{caps(row.word)}</TableCell>
-              <TableCell align="center">
+              <TableCell align="left">{caps(row.word.word)}</TableCell>
+              <TableCell align="center" style={{ fontSize: "1.5rem" }}>
                 {row.outcome === "CORRECT"
                   ? "🥳 🥳 🥳 🥳"
                   : row.outcome === "INCORRECT"
@@ -60,11 +65,6 @@ export const GameTable = ({
               <TableCell align="right">{`${row.points}`}</TableCell>
             </TableRow>
           ))}
-          <TableRow style={{ backgroundColor: "lightgray" }}>
-            <TableCell align="left">{`Total correct: ${totalCorrect}`}</TableCell>
-            <TableCell align="center">{`Total incorrect: ${totalIncorrect}`}</TableCell>
-            <TableCell align="right">{`Total points: ${totalPoints}`}</TableCell>
-          </TableRow>
         </TableBody>
       </Table>
     </TableContainer>

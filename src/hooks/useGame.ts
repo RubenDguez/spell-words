@@ -1,7 +1,7 @@
 import { useCallback, useReducer } from "react";
 import { initialState } from "../store";
 import { reducer } from "../store";
-import { getWord } from "../utils";
+import { getAllWords, getWord } from "../utils";
 
 export const useGame = () => {
   const [
@@ -17,23 +17,34 @@ export const useGame = () => {
       skipped,
       isStarted,
       tableData,
+      level,
+      minLevel,
+      maxLevel,
+      words,
+      wordList,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
 
   const startGame = useCallback(
-    (words: number) => {
-      getWord().then((resp) => {
-        dispatch({
-          type: "START GAME",
-          payload: {
-            ...resp,
-            wordsToPlay: words,
-          },
+    (w: number, l: number) => {
+      getAllWords(l).then((resp) => {
+        dispatch({ type: "SET WORDS", payload: { words: resp } });
+
+        getWord(resp, wordList).then((resp) => {
+          dispatch({
+            type: "START GAME",
+            payload: {
+              ...resp,
+              wordsToPlay: w,
+              level,
+              word: resp.word,
+            },
+          });
         });
       });
     },
-    [dispatch]
+    [dispatch, wordList, level]
   );
 
   const restartGame = useCallback(() => {
@@ -41,31 +52,31 @@ export const useGame = () => {
   }, [dispatch]);
 
   const correct = useCallback(() => {
-    getWord().then((resp) => {
+    getWord(words, wordList).then((resp) => {
       dispatch({
         type: "CORRECT",
         payload: resp,
       });
     });
-  }, [dispatch]);
+  }, [dispatch, wordList, words]);
 
   const incorrect = useCallback(() => {
-    getWord().then((resp) => {
+    getWord(words, wordList).then((resp) => {
       dispatch({
         type: "INCORRECT",
         payload: resp,
       });
     });
-  }, [dispatch]);
+  }, [dispatch, wordList, words]);
 
   const skip = useCallback(() => {
-    getWord().then((resp) => {
+    getWord(words, wordList).then((resp) => {
       dispatch({
         type: "SKIP",
         payload: resp,
       });
     });
-  }, [dispatch]);
+  }, [dispatch, wordList, words]);
 
   return {
     word,
@@ -79,6 +90,11 @@ export const useGame = () => {
     skipped,
     isStarted,
     tableData,
+    level,
+    minLevel,
+    maxLevel,
+    words,
+    wordList,
     startGame,
     restartGame,
     correct,

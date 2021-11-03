@@ -15,52 +15,92 @@ export const Game = () => {
     skipped,
     isStarted,
     tableData,
+    level,
+    minLevel,
+    maxLevel,
     startGame,
     restartGame,
     correct,
     incorrect,
     skip,
   } = useGame();
+
   return (
     <>
-      <Container maxWidth="md">
-        <GameHeader
-          word={word}
-          meanings={meanings}
-          isStarted={isStarted}
-          totalWords={totalWords}
-          wordsToPlay={wordsToPlay}
-          totalPoints={totalPoints}
-          possiblePoints={possiblePoints}
-        />
-      </Container>
-      <Container maxWidth="sm" style={{ marginTop: "3rem" }}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <GameButtons
-              isStarted={isStarted}
-              skippedWords={skipped}
-              totalWords={totalWords}
-              wordsToPlay={wordsToPlay}
-              startGame={startGame}
-              restartGame={restartGame}
-              correct={correct}
-              incorrect={incorrect}
-              skip={skip}
-            />
-          </Grid>
-          {isStarted && (
+      {!isStarted && (
+        <Container maxWidth="sm">
+          <Grid container spacing={1}>
             <Grid item xs={12}>
-              <GameTable
-                data={tableData}
+              <GameHeader
+                word={word.word}
+                meanings={meanings}
+                isStarted={isStarted}
+                totalWords={totalWords}
+                wordsToPlay={wordsToPlay}
                 totalPoints={totalPoints}
-                totalCorrect={totalCorrect}
-                totalIncorrect={totalIncorrect}
+                possiblePoints={possiblePoints}
               />
             </Grid>
-          )}
-        </Grid>
-      </Container>
+            <Grid item xs={12}>
+              <GameButtons
+                level={level}
+                isStarted={isStarted}
+                skippedWords={skipped}
+                totalWords={totalWords}
+                wordsToPlay={wordsToPlay}
+                minLevel={minLevel}
+                maxLevel={maxLevel}
+                startGame={startGame}
+                restartGame={restartGame}
+                correct={correct}
+                incorrect={incorrect}
+                skip={skip}
+              />
+            </Grid>
+          </Grid>
+        </Container>
+      )}
+      {isStarted && (
+        <Container maxWidth="md">
+          <Grid container spacing={1}>
+            <Grid item xs={6}>
+              <GameHeader
+                word={word.word}
+                meanings={meanings}
+                isStarted={isStarted}
+                totalWords={totalWords}
+                wordsToPlay={wordsToPlay}
+                totalPoints={totalPoints}
+                possiblePoints={possiblePoints}
+              />
+              <GameButtons
+                level={level}
+                isStarted={isStarted}
+                skippedWords={skipped}
+                totalWords={totalWords}
+                wordsToPlay={wordsToPlay}
+                minLevel={minLevel}
+                maxLevel={maxLevel}
+                startGame={startGame}
+                restartGame={restartGame}
+                correct={correct}
+                incorrect={incorrect}
+                skip={skip}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              {isStarted && (
+                <GameTable
+                  data={tableData}
+                  totalPoints={totalPoints}
+                  totalCorrect={totalCorrect}
+                  totalIncorrect={totalIncorrect}
+                />
+              )}
+            </Grid>
+          </Grid>
+        </Container>
+      )}
     </>
   );
 };

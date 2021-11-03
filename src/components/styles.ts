@@ -4,8 +4,7 @@ import { red, yellow, grey } from "@material-ui/core/colors";
 export const useStyles = makeStyles((theme: Theme) => ({
   word: {
     textAlign: "center",
-    marginTop: "3rem",
-    marginBottom: "3rem",
+    marginBottom: "1rem",
     borderRadius: "6px",
     padding: "1rem",
   },
@@ -23,10 +22,6 @@ export const useStyles = makeStyles((theme: Theme) => ({
   totalPoints: {
     textAlign: "left",
     color: grey[600],
-  },
-  skipButton: {
-    backgroundColor: yellow[200],
-    color: red[400],
   },
   correctRow: {
     backgroundColor: "white",

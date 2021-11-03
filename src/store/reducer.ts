@@ -3,6 +3,11 @@ import { getWordValue } from "../utils";
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
+    case "SET WORDS":
+      return {
+        ...state,
+        words: action.payload.words,
+      };
     case "START GAME":
       return {
         ...state,
@@ -10,17 +15,20 @@ export const reducer = (state: State, action: Action): State => {
         word: action.payload.word,
         meanings: action.payload.meanings.shortdef,
         wordsToPlay: action.payload.wordsToPlay,
-        possiblePoints: getWordValue(action.payload.word),
+        possiblePoints: getWordValue(action.payload.word.word),
+        level: action.payload.level,
+        wordList: [action.payload.word, ...state.wordList],
       };
     case "CORRECT":
       return {
         ...state,
         word: action.payload.word,
         meanings: action.payload.meanings.shortdef,
-        possiblePoints: getWordValue(action.payload.word),
+        possiblePoints: getWordValue(action.payload.word.word),
         totalCorrect: (state.totalCorrect += 1),
         totalWords: (state.totalWords += 1),
         totalPoints: (state.totalPoints += state.possiblePoints),
+        wordList: [action.payload.word, ...state.wordList],
         tableData: [
           {
             word: state.word,
@@ -37,7 +45,8 @@ export const reducer = (state: State, action: Action): State => {
         meanings: action.payload.meanings.shortdef,
         totalIncorrect: (state.totalIncorrect += 1),
         totalWords: (state.totalWords += 1),
-        possiblePoints: getWordValue(action.payload.word),
+        possiblePoints: getWordValue(action.payload.word.word),
+        wordList: [action.payload.word, ...state.wordList],
         tableData: [
           { word: state.word, outcome: "INCORRECT", points: 0 },
           ...state.tableData,
@@ -48,9 +57,9 @@ export const reducer = (state: State, action: Action): State => {
         ...state,
         word: action.payload.word,
         meanings: action.payload.meanings.shortdef,
-        possiblePoints: getWordValue(action.payload.word),
+        possiblePoints: getWordValue(action.payload.word.word),
         skipped: (state.skipped += 1),
-        wordsToPlay: 10,
+        wordList: [action.payload.word, ...state.wordList],
         tableData: [
           { word: state.word, outcome: "SKIPPED", points: 0 },
           ...state.tableData,
