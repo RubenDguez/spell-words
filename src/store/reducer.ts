@@ -8,6 +8,7 @@ export const reducer = (state: State, action: Action): State => {
         ...state,
         isStarted: true,
         word: action.payload.word,
+        meanings: action.payload.meanings.shortdef,
         wordsToPlay: action.payload.wordsToPlay,
         possiblePoints: getWordValue(action.payload.word),
       };
@@ -15,6 +16,7 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         word: action.payload.word,
+        meanings: action.payload.meanings.shortdef,
         possiblePoints: getWordValue(action.payload.word),
         totalCorrect: (state.totalCorrect += 1),
         totalWords: (state.totalWords += 1),
@@ -32,6 +34,7 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         word: action.payload.word,
+        meanings: action.payload.meanings.shortdef,
         totalIncorrect: (state.totalIncorrect += 1),
         totalWords: (state.totalWords += 1),
         possiblePoints: getWordValue(action.payload.word),
@@ -44,6 +47,7 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         word: action.payload.word,
+        meanings: action.payload.meanings.shortdef,
         possiblePoints: getWordValue(action.payload.word),
         skipped: (state.skipped += 1),
         wordsToPlay: 10,

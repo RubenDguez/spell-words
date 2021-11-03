@@ -7,6 +7,7 @@ export const useGame = () => {
   const [
     {
       word,
+      meanings,
       wordsToPlay,
       totalPoints,
       totalCorrect,
@@ -25,7 +26,10 @@ export const useGame = () => {
       getWord().then((resp) => {
         dispatch({
           type: "START GAME",
-          payload: { word: resp, wordsToPlay: words },
+          payload: {
+            ...resp,
+            wordsToPlay: words,
+          },
         });
       });
     },
@@ -40,7 +44,7 @@ export const useGame = () => {
     getWord().then((resp) => {
       dispatch({
         type: "CORRECT",
-        payload: { word: resp },
+        payload: resp,
       });
     });
   }, [dispatch]);
@@ -49,7 +53,7 @@ export const useGame = () => {
     getWord().then((resp) => {
       dispatch({
         type: "INCORRECT",
-        payload: { word: resp },
+        payload: resp,
       });
     });
   }, [dispatch]);
@@ -58,13 +62,14 @@ export const useGame = () => {
     getWord().then((resp) => {
       dispatch({
         type: "SKIP",
-        payload: { word: resp },
+        payload: resp,
       });
     });
   }, [dispatch]);
 
   return {
     word,
+    meanings,
     wordsToPlay,
     totalPoints,
     totalCorrect,

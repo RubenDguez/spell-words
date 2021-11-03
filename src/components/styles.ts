@@ -12,6 +12,14 @@ export const useStyles = makeStyles((theme: Theme) => ({
   container: {
     padding: "2rem",
   },
+  subContainer: {
+    marginBottom: 8,
+    borderBottom: "2px solid grey",
+    color: "grey",
+  },
+  subContainerTitle: {
+    marginBottom: 4,
+  },
   totalPoints: {
     textAlign: "left",
     color: grey[600],

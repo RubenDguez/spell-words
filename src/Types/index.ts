@@ -9,13 +9,25 @@ export type TRow = {
 };
 
 export type Action =
-  | { type: "START GAME"; payload: { word: string; wordsToPlay: number } }
+  | {
+      type: "START GAME";
+      payload: { word: string; wordsToPlay: number; meanings: TResponse };
+    }
   | { type: "RESTART GAME"; payload: { state: State } }
-  | { type: "CORRECT"; payload: { word: string } }
-  | { type: "INCORRECT"; payload: { word: string } }
-  | { type: "SKIP"; payload: { word: string } };
+  | { type: "CORRECT"; payload: { word: string; meanings: TResponse } }
+  | { type: "INCORRECT"; payload: { word: string; meanings: TResponse } }
+  | { type: "SKIP"; payload: { word: string; meanings: TResponse } };
 
 export type TLetterValues = {
   letters: string;
   value: number;
+};
+
+export type TResponse = {
+  shortdef: string[];
+};
+
+export type TWordResponse = {
+  word: string;
+  meanings: TResponse;
 };

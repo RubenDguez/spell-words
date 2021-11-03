@@ -5,6 +5,7 @@ import { useGame } from "../hooks";
 export const Game = () => {
   const {
     word,
+    meanings,
     wordsToPlay,
     totalPoints,
     totalCorrect,
@@ -25,6 +26,7 @@ export const Game = () => {
       <Container maxWidth="md">
         <GameHeader
           word={word}
+          meanings={meanings}
           isStarted={isStarted}
           totalWords={totalWords}
           wordsToPlay={wordsToPlay}

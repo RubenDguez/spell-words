@@ -52,10 +52,10 @@ export const GameTable = ({
               <TableCell align="left">{caps(row.word)}</TableCell>
               <TableCell align="center">
                 {row.outcome === "CORRECT"
-                  ? "🤣 🤣 🤣 🤣"
+                  ? "🥳 🥳 🥳 🥳"
                   : row.outcome === "INCORRECT"
-                  ? "😔 😔 😔 😔"
-                  : "🤨 🤨 🤨 🤨"}
+                  ? "😡 😡 😡 😡"
+                  : "😢 😢 😢 😢"}
               </TableCell>
               <TableCell align="right">{`${row.points}`}</TableCell>
             </TableRow>
