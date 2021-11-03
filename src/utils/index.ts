@@ -1,8 +1,8 @@
 import axios from "axios";
 import { TResponse, TLetterValues, TWordResponse, TWord } from "../Types";
 
-const URL = `https://www.dictionaryapi.com/api/v3/references/sd2/json/`;
-const API_KEY = "?key=ed0eea47-a413-4c71-94f0-fb792e91dcdd";
+const URL = process.env.REACT_APP_WEBSTER_URL;
+const API_KEY = process.env.REACT_APP_WEBSTER_API_KEY;
 
 const LETTER_VALUES: TLetterValues[] = [
   { letters: "aeilnorstu", value: 1 },
