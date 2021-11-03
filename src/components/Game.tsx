@@ -1,102 +1,34 @@
 import { Container, Grid } from "@material-ui/core";
+import { useContext } from "react";
 import { GameButtons, GameHeader, GameTable } from ".";
-import { useGame } from "../hooks";
+import { StoreContext } from "../providers/StoreProvider";
 
 export const Game = () => {
-  const {
-    word,
-    meanings,
-    wordsToPlay,
-    totalPoints,
-    totalCorrect,
-    totalIncorrect,
-    totalWords,
-    possiblePoints,
-    skipped,
-    isStarted,
-    tableData,
-    level,
-    minLevel,
-    maxLevel,
-    startGame,
-    restartGame,
-    correct,
-    incorrect,
-    skip,
-  } = useGame();
+  const { store } = useContext(StoreContext);
 
   return (
     <>
-      {!isStarted && (
+      {!store.isStarted && (
         <Container maxWidth="sm">
           <Grid container spacing={1}>
             <Grid item xs={12}>
-              <GameHeader
-                word={word.word}
-                meanings={meanings}
-                isStarted={isStarted}
-                totalWords={totalWords}
-                wordsToPlay={wordsToPlay}
-                totalPoints={totalPoints}
-                possiblePoints={possiblePoints}
-              />
+              <GameHeader />
             </Grid>
             <Grid item xs={12}>
-              <GameButtons
-                level={level}
-                isStarted={isStarted}
-                skippedWords={skipped}
-                totalWords={totalWords}
-                wordsToPlay={wordsToPlay}
-                minLevel={minLevel}
-                maxLevel={maxLevel}
-                startGame={startGame}
-                restartGame={restartGame}
-                correct={correct}
-                incorrect={incorrect}
-                skip={skip}
-              />
+              <GameButtons />
             </Grid>
           </Grid>
         </Container>
       )}
-      {isStarted && (
+      {store.isStarted && (
         <Container maxWidth="md">
           <Grid container spacing={1}>
             <Grid item xs={6}>
-              <GameHeader
-                word={word.word}
-                meanings={meanings}
-                isStarted={isStarted}
-                totalWords={totalWords}
-                wordsToPlay={wordsToPlay}
-                totalPoints={totalPoints}
-                possiblePoints={possiblePoints}
-              />
-              <GameButtons
-                level={level}
-                isStarted={isStarted}
-                skippedWords={skipped}
-                totalWords={totalWords}
-                wordsToPlay={wordsToPlay}
-                minLevel={minLevel}
-                maxLevel={maxLevel}
-                startGame={startGame}
-                restartGame={restartGame}
-                correct={correct}
-                incorrect={incorrect}
-                skip={skip}
-              />
+              <GameHeader />
+              <GameButtons />
             </Grid>
             <Grid item xs={6}>
-              {isStarted && (
-                <GameTable
-                  data={tableData}
-                  totalPoints={totalPoints}
-                  totalCorrect={totalCorrect}
-                  totalIncorrect={totalIncorrect}
-                />
-              )}
+              {store.isStarted && <GameTable />}
             </Grid>
           </Grid>
         </Container>

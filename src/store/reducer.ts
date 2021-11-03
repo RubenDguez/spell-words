@@ -1,7 +1,7 @@
-import { Action, State } from "../Types";
+import { Action, TState } from "../Types";
 import { getWordValue } from "../utils";
 
-export const reducer = (state: State, action: Action): State => {
+export const reducer = (state: TState, action: Action): TState => {
   switch (action.type) {
     case "SET WORDS":
       return {

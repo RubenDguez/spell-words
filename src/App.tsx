@@ -1,7 +1,12 @@
 import { Game } from "./components";
+import { StoreProvider } from "./providers/StoreProvider";
 
 const App = () => {
-  return <Game />;
+  return (
+    <StoreProvider>
+      <Game />
+    </StoreProvider>
+  );
 };
 
 export default App;

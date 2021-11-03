@@ -8,23 +8,13 @@ import {
   TableRow,
 } from "@material-ui/core";
 import clsx from "clsx";
-import { TRow } from "../Types";
+import { useContext } from "react";
+import { StoreContext } from "../providers/StoreProvider";
 import { caps } from "../utils";
 import { useStyles } from "./styles";
 
-interface IGameTable {
-  data: TRow[];
-  totalPoints: number;
-  totalCorrect: number;
-  totalIncorrect: number;
-}
-
-export const GameTable = ({
-  data,
-  totalPoints,
-  totalCorrect,
-  totalIncorrect,
-}: IGameTable) => {
+export const GameTable = () => {
+  const { store } = useContext(StoreContext);
   const classes = useStyles();
 
   return (
@@ -37,13 +27,13 @@ export const GameTable = ({
             <TableCell align="right">Points</TableCell>
           </TableRow>
           <TableRow style={{ backgroundColor: "lightgray" }}>
-            <TableCell align="left">{`Total correct: ${totalCorrect}`}</TableCell>
-            <TableCell align="center">{`Total incorrect: ${totalIncorrect}`}</TableCell>
-            <TableCell align="right">{`Total points: ${totalPoints}`}</TableCell>
+            <TableCell align="left">{`Total correct: ${store.totalCorrect}`}</TableCell>
+            <TableCell align="center">{`Total incorrect: ${store.totalIncorrect}`}</TableCell>
+            <TableCell align="right">{`Total points: ${store.totalPoints}`}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row) => (
+          {store.tableData.map((row) => (
             <TableRow
               key={row.word.id}
               className={clsx(

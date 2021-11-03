@@ -1,27 +1,12 @@
-import { Container, Grid, Paper, Typography } from "@material-ui/core";
+import { Grid, Paper, Typography } from "@material-ui/core";
 import clsx from "clsx";
 import { useStyles } from "./styles";
 import { caps } from "../utils";
+import { useContext } from "react";
+import { StoreContext } from "../providers/StoreProvider";
 
-interface IGameHeader {
-  word: string;
-  meanings: string[];
-  wordsToPlay: number;
-  isStarted: boolean;
-  totalWords: number;
-  totalPoints: number;
-  possiblePoints: number;
-}
-
-export const GameHeader = ({
-  word,
-  meanings,
-  wordsToPlay,
-  isStarted,
-  totalWords,
-  totalPoints,
-  possiblePoints,
-}: IGameHeader) => {
+export const GameHeader = () => {
+  const { store } = useContext(StoreContext);
   const classes = useStyles();
 
   return (
@@ -33,13 +18,15 @@ export const GameHeader = ({
             color="primary"
             className={clsx(classes.word)}
           >
-            {totalWords < wordsToPlay ? word.toUpperCase() : "Game Over"}
+            {store.totalWords < store.wordsToPlay
+              ? store.word.word.toUpperCase()
+              : "Game Over"}
           </Typography>
         </Paper>
       </Grid>
-      {isStarted && (
+      {store.isStarted && (
         <Paper className={classes.container}>
-          {totalWords < wordsToPlay && (
+          {store.totalWords < store.wordsToPlay && (
             <div className={classes.subContainer}>
               <Typography
                 variant="subtitle2"
@@ -47,7 +34,7 @@ export const GameHeader = ({
               >
                 Meaning(s):
               </Typography>
-              {meanings.map((m) => (
+              {store.meanings.map((m) => (
                 <Typography key={m} variant="caption" display="block">
                   {caps(m)}
                 </Typography>
@@ -63,21 +50,21 @@ export const GameHeader = ({
               display="block"
               className={clsx(classes.totalPoints)}
             >
-              {`Total words played: ${totalWords}`}
+              {`Total words played: ${store.totalWords}`}
             </Typography>
             <Typography
               variant="caption"
               display="block"
               className={clsx(classes.totalPoints)}
             >
-              {`Words to be played: ${wordsToPlay}`}
+              {`Words to be played: ${store.wordsToPlay}`}
             </Typography>
             <Typography
               variant="caption"
               display="block"
               className={clsx(classes.totalPoints)}
             >
-              {`Remaining words: ${wordsToPlay - totalWords}`}
+              {`Remaining words: ${store.wordsToPlay - store.totalWords}`}
             </Typography>
             <Typography
               variant="caption"
@@ -85,9 +72,9 @@ export const GameHeader = ({
               className={clsx(classes.totalPoints)}
               style={{ marginTop: "1rem" }}
             >
-              {totalWords < wordsToPlay
-                ? `This word plays for ${possiblePoints} points`
-                : `Your total points: ${totalPoints}`}
+              {store.totalWords < store.wordsToPlay
+                ? `This word plays for ${store.possiblePoints} points`
+                : `Your total points: ${store.totalPoints}`}
             </Typography>
           </div>
         </Paper>
