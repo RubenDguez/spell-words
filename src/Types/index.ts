@@ -2,13 +2,7 @@ import { initialState } from "../store";
 
 export type TState = typeof initialState;
 
-export type TRow = {
-  word: TWord;
-  outcome: "CORRECT" | "INCORRECT" | "SKIPPED";
-  points: number;
-};
-
-export type Action =
+export type TAction =
   | {
       type: "START GAME";
       payload: {
@@ -27,6 +21,12 @@ export type Action =
 export type TLetterValues = {
   letters: string;
   value: number;
+};
+
+export type TRow = {
+  word: TWord;
+  outcome: "CORRECT" | "INCORRECT" | "SKIPPED";
+  points: number;
 };
 
 export type TResponse = {
